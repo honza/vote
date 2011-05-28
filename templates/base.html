@@ -1,11 +1,66 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> 	<html lang="en"> <!--<![endif]-->
 <head>
-    <title>Base</title>
-    
+
+	<meta charset="utf-8" />
+    <title>Vote</title>
+	<meta name="description" content="Voting application">
+	<meta name="author" content="Honza Pokornu">
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
+	
+    <link rel="stylesheet" href="{{ STATIC_URL }}base.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}skeleton.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}layout.css">
+	
+    <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico">
+    <link rel="apple-touch-icon" href="{{ STATIC_URL }}apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ STATIC_URL }}apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ STATIC_URL }}apple-touch-icon-114x114.png" />
+	
 </head>
 <body>
-    {% block main %}
-    {% endblock %}
+
+	<div class="container">	
+    <h1>Convention vote</h1>
+        <div class="one-third column">
+            <h3>About</h3>
+            <p>
+                The purpose of this page is to facilitate the referendum at Bedford
+                Baptist Church on the matter of whether or the church should join
+                the Convention of Atlantic Baptist Churches.
+            </p>
+            <p>
+                If you are a member of Bedford Baptist Church, you may and are
+                encouraged to vote in this referendum. Voting ends at 8:00pm ADT,
+                June 13, 2011.
+            </p>
+            <p>
+                If you have submitted the wrong vote by accident, please email
+                the <a href="mailto:office@bedfordbaptist.ca">church office</a>
+                as soon as possible. They will cancel your vote and then you
+                can resubmit it.
+            </p>
+        </div>
+
+        <div class="two-thirds column">
+            {% block main %}
+            {% endblock %}
+        </div>
+
+	</div><!-- container -->
+		
+	<!-- JS
+	================================================== -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
+    <script>window.jQuery || document.write("<script src='{{ STATIC_URL }}jquery-1.5.1.min.js'>\x3C/script>")</script>
+    <script src="{{ STATIC_URL }}app.js"></script>
+	
 </body>
 </html>

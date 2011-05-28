@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 
 {% block main %}
-    <h1>Convention vote</h1>
+
+        <p>
+            Please fill in the fields below. All fields are required. 
+        </p>
 
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <p><input type="submit" value="Submit your vote" /></p>
     </form>
+
 
 {% endblock %}

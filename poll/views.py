@@ -22,4 +22,5 @@ def index(request):
 
 
 def done(request):
-    return render_to_response('done.html', {})
+    return render_to_response('done.html', {},
+            context_instance=RequestContext(request))
