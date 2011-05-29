@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Staff dashboard</h1>
+
+    <div class="three columns">
+        <h3>Actions</h3>
+        <ul class="square">
+            <li><a href="{% url staff %}">View results</a></li>
+            <li><a href="{% url voters %}">View voters</a></li>
+            <li><a href="{% url logout %}">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="thirteen columns">
+        {% block main %}
+
+        {% endblock %}
+    </div>
+
+{% endblock %}

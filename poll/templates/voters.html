@@ -1,0 +1,17 @@
+{% extends "staff_base.html" %}
+
+{% block main %}
+    <h2>List of voters</h2>
+
+    <table>
+        {% for voter in voters %}
+        <tr>
+            <td width="70%">{{ voter.last_name }}, {{ voter.first_name }}</td>
+            <td><input type="button" value="Not a member" /></td>
+            <td><input type="button" value="Duplicate" /></td>
+            <td><input type="button" value="Delete vote" /></td>
+        </tr>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

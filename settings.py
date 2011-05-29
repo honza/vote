@@ -141,3 +141,6 @@ LOGGING = {
         },
     }
 }
+
+LOGIN_REDIRECT_URL = '/staff/'
+LOGIN_URL = '/staff/login/'
