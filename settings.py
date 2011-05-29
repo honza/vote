@@ -144,3 +144,8 @@ LOGGING = {
 
 LOGIN_REDIRECT_URL = '/staff/'
 LOGIN_URL = '/staff/login/'
+
+try:
+    from settings_local import *
+except ImportError:
+    pass
