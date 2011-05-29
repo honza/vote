@@ -1,5 +1,6 @@
+import json
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -47,3 +48,46 @@ def voters(request):
     return render_to_response('voters.html', {
         'voters': voters
         }, context_instance=RequestContext(request))
+
+
+@login_required
+def ajax(request):
+    res = {}
+    allowed_actions = ['no-member', 'duplicate', 'delete']
+    action = request.GET.get('action', None)
+    uid = request.GET.get('uid', None)
+    if not action:
+        res['status'] = 'fail'
+        res['message'] = "Missing action"
+        return HttpResponse(json.dumps(res))
+    if not uid:
+        res['status'] = 'fail'
+        res['message'] = "Missing uid"
+        return HttpResponse(json.dumps(res))
+    if action not in allowed_actions:
+        res['status'] = 'fail'
+        res['message'] = "Action forbidden"
+        return HttpResponse(json.dumps(res))
+    try:
+        vote = Vote.objects.get(pk=uid)
+    except:
+        res['status'] = 'fail'
+        res['message'] = "Resource not found"
+        return HttpResponse(json.dumps(res))
+
+    # Enough of security, let's get to work
+    if action == 'no-member':
+        vote.is_member = False
+        vote.save()
+    elif action == 'duplicate':
+        vote.duplicate = True
+        vote.save()
+    elif action == 'delete':
+        vote.deleted = True
+        vote.save()
+    else:
+        pass
+
+    res['status'] = 'success'
+
+    return HttpResponse(json.dumps(res))

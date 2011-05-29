@@ -1,42 +1,49 @@
-/* 
-* Skeleton V1.0.2
-* Copyright 2011, Dave Gamache
-* www.getskeleton.com
-* Free to use under the MIT license.
-* http://www.opensource.org/licenses/mit-license.php
-* 5/20/2011
-*/	
-	
+(function($) {
 
-$(document).ready(function() {
+  var actions = {
+    'delete': 'Deleted',
+    'no-member': 'Not a member',
+    'duplicate': 'Duplicate'
+  };
 
-	/* Tabs Activiation
-	================================================== */
-	var tabs = $('ul.tabs'),
-	    tabsContent = $('ul.tabs-content');
-	
-	tabs.each(function(i) {
-		//Get all tabs
-		var tab = $(this).find('> li > a');
-		tab.click(function(e) {
-			
-			//Get Location of tab's content
-			var contentLocation = $(this).attr('href') + "Tab";
-			
-			//Let go if not a hashed one
-			if(contentLocation.charAt(0)=="#") {
-			
-				e.preventDefault();
-			
-				//Make Tab Active
-				tab.removeClass('active');
-				$(this).addClass('active');
-				
-				//Show Tab Content
-				$(contentLocation).show().siblings().hide();
-				
-			} 
-		});
-	}); 
-	
-});
+  var makeReq = function(id, action) {
+    var data = {
+      uid: id,
+      action: action
+    };
+    $.get('/staff/ajax/', data, function(data) {
+      var res = $.parseJSON(data);
+      if (res.status == 'success') {
+        // update first table cell
+        var tr = $('#uid-' + id);
+        tr.addClass(action);
+        tr.children().first().html(actions[action]);
+      } else {
+        alert(status.message);
+      }
+    });
+  };
+
+  $(function() {
+
+    $('input.no-member').click(function() {
+      var id = $(this).parent().parent().attr('id');
+      id = id.substr(4, (id.length - 4));
+      makeReq(id, 'no-member');
+    });
+
+    $('input.duplicate').click(function() {
+      var id = $(this).parent().parent().attr('id');
+      id = id.substr(4, (id.length - 4));
+      makeReq(id, 'duplicate');
+    });
+
+    $('input.delete').click(function() {
+      var id = $(this).parent().parent().attr('id');
+      id = id.substr(4, (id.length - 4));
+      makeReq(id, 'delete');
+    });
+
+  });
+
+})(jQuery);

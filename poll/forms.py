@@ -8,7 +8,7 @@ class VoteForm(ModelForm):
 
     class Meta:
         model = Vote
-        exclude = ('member_confirmed',)
+        exclude = ('deleted', 'duplicate', 'is_member',)
 
     def clean(self):
         data = self.cleaned_data

@@ -3,13 +3,31 @@
 {% block main %}
     <h2>List of voters</h2>
 
-    <table>
+    <table id="voters">
+        <thead>
+            <td>Status</td>
+            <td>Name</td>
+            <td>Actions</td>
+        </thead>
         {% for voter in voters %}
-        <tr>
-            <td width="70%">{{ voter.last_name }}, {{ voter.first_name }}</td>
-            <td><input type="button" value="Not a member" /></td>
-            <td><input type="button" value="Duplicate" /></td>
-            <td><input type="button" value="Delete vote" /></td>
+        <tr id="uid-{{ voter.id }}" class="
+                {% if voter.deleted %}delete {% endif %}
+                {% if not voter.is_member %}no-member {% endif %}
+                {% if voter.duplicate %}duplicate {% endif %}
+            ">
+            <td>
+                {% if voter.deleted %}Deleted<br> {% endif %}
+                {% if not voter.is_member %}Not a member<br> {% endif %}
+                {% if voter.duplicate %}Duplicate {% endif %}
+            </td>
+            <td class="name">
+                {{ voter.last_name }}, {{ voter.first_name }}
+            </td>
+            <td>
+                <input class="no-member" type="button" value="Not a member" />
+                <input class="duplicate" type="button" value="Duplicate" />
+                <input class="delete" type="button" value="Delete vote" />
+            </td>
         </tr>
         {% endfor %}
     </ul>

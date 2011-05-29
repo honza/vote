@@ -1,0 +1,26 @@
+/* Voter table styles */
+
+#voters td {
+   border: 1px solid #444;
+   padding: 20px;
+}
+
+#voters thead {
+    background: #ececec;
+}
+
+.name {
+    min-width: 200px;
+}
+
+.delete {
+    background: #FFA8A8;
+}
+
+.no-member {
+    background: #94E6FF;
+}
+
+.duplicate {
+    background: #F2FFA8;
+}
