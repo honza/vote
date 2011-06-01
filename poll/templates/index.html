@@ -6,6 +6,18 @@
             Please fill in the fields below. All fields are required. 
         </p>
 
+        <p>Please vote <strong>yes</strong> if you would like the church to
+        join, and vote <strong>no</strong> if you would like the church to stay
+        independent.
+        </p>
+
+        <p>
+            <strong>Privacy:</strong> 
+            By submitting your vote, you agree that your name be stored in the database in order that your membership might
+            be verified by church staff. However, your vote will remain
+            anonymous.
+        </p>
+
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
