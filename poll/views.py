@@ -36,9 +36,14 @@ def staff(request):
     total = votes.count()
     yes = votes.filter(vote='Y').count()
     no = votes.filter(vote='N').count()
+
+    yes_p = yes * 100 / total
+    no_p = no * 100 / total
     return render_to_response('staff.html', {
         'no': no,
         'yes': yes,
+        'yes_p': yes_p,
+        'no_p': no_p,
         'total': total
         }, context_instance=RequestContext(request))
 
