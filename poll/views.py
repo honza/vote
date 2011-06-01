@@ -32,9 +32,10 @@ def done(request):
 
 @login_required
 def staff(request):
-    total = Vote.objects.count()
-    yes = Vote.objects.filter(vote='Y').count()
-    no = Vote.objects.filter(vote='N').count()
+    votes = Vote.objects.all().filter(is_member=True, duplicate=False, deleted=False)
+    total = votes.count()
+    yes = votes.filter(vote='Y').count()
+    no = votes.filter(vote='N').count()
     return render_to_response('staff.html', {
         'no': no,
         'yes': yes,
