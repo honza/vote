@@ -15,3 +15,14 @@ class Vote(models.Model):
 
     def __unicode__(self):
         return "%s, %s" % (self.last_name, self.first_name)
+
+
+class Switch(models.Model):
+    vote_active = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        if self.vote_active:
+            return "The vote is on."
+        else:
+            return "The vote is off."
+

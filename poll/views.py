@@ -2,15 +2,23 @@ import json
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from models import Vote
+from models import Vote, Switch
 from forms import VoteForm
+
+
+def _is_active():
+    s = get_object_or_404(Switch, pk=1)
+    return s.vote_active
 
 
 # Public views
 
 def index(request):
+    if not _is_active():
+        return render_to_response('over.html', {},
+            context_instance=RequestContext(request))
     if request.method == 'POST':
         form = VoteForm(request.POST)
         if form.is_valid():
