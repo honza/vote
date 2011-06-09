@@ -577,7 +577,22 @@
 
 /* Results table */
 
-
 #results td {
     padding: 2px 10px;
+}
+
+/* Legend */
+
+.legend {
+    width: 30px;
+    height: 10px;
+    display: block;
+}
+
+#yes {
+    background-color: #0094ee;
+}
+
+#no {
+    background-color: #f02c02;
 }
