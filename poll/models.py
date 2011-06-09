@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 CHOICES = (
@@ -6,6 +7,7 @@ CHOICES = (
 )
 
 class Vote(models.Model):
+    added = models.DateTimeField(default=datetime.now)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     vote = models.CharField(max_length=1, choices=CHOICES)
