@@ -37,8 +37,12 @@ def staff(request):
     yes = votes.filter(vote='Y').count()
     no = votes.filter(vote='N').count()
 
-    yes_p = yes * 100 / total
-    no_p = no * 100 / total
+    try:
+        yes_p = yes * 100 / total
+        no_p = no * 100 / total
+    except ZeroDivisionError:
+        yes_p = 0
+        no_p = 0
     return render_to_response('staff.html', {
         'no': no,
         'yes': yes,
