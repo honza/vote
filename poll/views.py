@@ -109,3 +109,15 @@ def ajax(request):
     res['status'] = 'success'
 
     return HttpResponse(json.dumps(res))
+
+
+@login_required
+def export(request):
+    voters = Vote.objects.order_by('last_name', 'first_name').all()
+    res = []
+    for v in voters:
+        res.append({
+            'first': v.first_name,
+            'last': v.last_name
+        })
+    return HttpResponse(json.dumps(res), mimetype='application/json')

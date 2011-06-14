@@ -9,4 +9,5 @@ urlpatterns = patterns('',
     url(r'^staff/logout/$', 'django.contrib.auth.views.logout', name='logout'),
     url(r'^staff/voters/$', 'poll.views.voters', name='voters'),
     url(r'^staff/ajax/$', 'poll.views.ajax', name='ajax'),
+    url(r'^staff/export/$', 'poll.views.export', name='ajax'),
 )
